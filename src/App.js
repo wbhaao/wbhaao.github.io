@@ -7,6 +7,9 @@ import imgUser3 from './안예성.png';
 import imgUser4 from './오창민.png';
 import imgUser5 from './이재현.png';
 import imgUser6 from './최성훈.png';
+import scissor from './scissor.png';
+import dollar from './dollar.png';
+import location from './location.png';
 
 function Welcome(props) {
   return (
@@ -33,7 +36,33 @@ function Welcome(props) {
   );
 }
 function Choose(props) {
-  
+  return (
+    <div className='background'>
+      <div className='container'>
+        <img className='title' src={imgLogo}></img>
+        <form className='chooseForm' onSubmit={event => {
+            event.preventDefault()
+            props.onGame(event.target.id)
+          }}>
+            <span className='box'>
+              <input value=" " type="submit" id='one'/>
+              <img id='oneone' src={scissor}/>
+              <h1 id='o'>가위바위보</h1>
+            </span>
+            <span className='box'>
+              <input value=" " type="submit" id='two'/>
+              <img id='twotwo' src={dollar}/>
+              <h1 id='t'>동전 던지기</h1>
+            </span>
+            <span className='box'>
+              <input value=" " type="submit" id='three'/>
+              <img id='threethree' src={location}/>
+              <h1 id='th'>순발력 게임</h1>
+            </span>
+        </form>
+      </div>
+    </div>
+  );
 }
 // function App(props) {
 //   return (
@@ -48,10 +77,19 @@ function App() {
     content = <Welcome onStart={() => {
       setMode('CHOOSE');
     }}/>;
-    console.log("b")
   }
   else if (mode === "CHOOSE"){
-    content = "hello wrold"
+    content = <Choose onGame={(int) => {
+      if (int==0){
+        setMode('FLIP');
+      }
+      else if (int==1){
+        setMode('FLIP');
+      }
+      else{
+        setMode('FLIP');
+      }
+    }}/>;
   }
   else if (mode === "FLIP"){
     
