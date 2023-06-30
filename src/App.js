@@ -35,31 +35,32 @@ function Welcome(props) {
     </div>
   );
 }
+
+function Card(props) {
+  return (
+    <form className='card-box' onSubmit={event => {
+      event.preventDefault()
+      props.onGame(event.target.id)
+    }}>
+      <div className='text-wrap'>
+        <h1>{props.title}</h1>
+        {/* <p>순발력이 중요함</p> */}
+      </div>
+      <input value="" type="submit"/>
+      <div className='imgCover'>
+        <img src={props.imgLink}/>
+      </div>
+  </form>
+  );
+}
 function Choose(props) {
   return (
     <div className='background'>
-      <div className='container'>
+      <div className='container alignContainer'>
         <img className='title' src={imgLogo}></img>
-        <form className='chooseForm' onSubmit={event => {
-            event.preventDefault()
-            props.onGame(event.target.id)
-          }}>
-            <span className='box'>
-              <input value=" " type="submit" id='one'/>
-              <img id='oneone' src={scissor}/>
-              <h1 id='o'>가위바위보</h1>
-            </span>
-            <span className='box'>
-              <input value=" " type="submit" id='two'/>
-              <img id='twotwo' src={dollar}/>
-              <h1 id='t'>동전 던지기</h1>
-            </span>
-            <span className='box'>
-              <input value=" " type="submit" id='three'/>
-              <img id='threethree' src={location}/>
-              <h1 id='th'>순발력 게임</h1>
-            </span>
-        </form>
+        <Card imgLink={scissor} title={"가위바위보"}/>
+        <Card imgLink={dollar} title={"동전뒤집기"}/>
+        <Card imgLink={location} title={"순발력게임"}/>
       </div>
     </div>
   );

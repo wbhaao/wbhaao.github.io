@@ -20,7 +20,7 @@ html, body, #root,.background, .container{
   background-color: rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 0 7px white, 0 0 10px black;
 }
-.container > form > input{
+.startButton > input{
   border-radius: 114px;
   background: #FFF;
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.15);
@@ -70,65 +70,60 @@ html, body, #root,.background, .container{
   transform: translate3d(-50%, 0, 0);
 }
 
-.box > input{
-  transform: translate3d(-50%, 0, 0);
-  position: absolute;
-  margin: 10px;
+.container1{
+	text-align: center;
+	margin-top:200px;
+}
+.card-box{
+	transition: 0.3s;
+	position: relative;
+	border-radius: 8px;
+	width:100%;
+	max-width: 280px;
+	overflow: hidden;
+	display: inline-block;
+	margin-top:150px;
+	box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+	transform: scale(1);
   display: inline-block;
-  width: 300px;
-  height: 400px;
-  flex-shrink: 0;
-  border-radius: 35px;
-  border: 3px solid #FFF;
-  background: rgba(255, 255, 255, 0.30);
-  font-size: 24px;
-  font-family: SBAggroB;
 }
-
-.box > img{
-  height: 230px;
-  transform: translate3d(-50%, 15%, 0);
+.card-box img{
+  height:329px;
+}
+.card-box:hover{
+	transform: scale(0.95);
+}
+.text-wrap{
+	position: absolute;
+	bottom:0;
+	z-index: 10;
+	padding:24px;
+	text-align: center;
+}
+.text-wrap h1{
+	font-size: 46.4px;
+	font-weight: bold;
+	margin-bottom:18px;
+  margin: 0;
+	color:#fff;
+}
+.text-wrap p{
+  margin: 5px;
+  font-size: 20px;
+	color:#fff;
+	line-height: 1.5;
+} 
+.card-box {
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: 20px;
+}
+.card-box input{
   position: absolute;
+  height: 100%;
+  width: 100%;
+  background: 0%;
+  border: none;
 }
-#oneone{
-  transform: translate3d(107%, 15%, 0);
-  position: absolute;
-}
-#twotwo{
-  transform: translate3d(-45%, 15%, 0);
-  position: absolute;
-}
-#threethree{
-  transform: translate3d(-194%, 15%, 0);
-  position: absolute;
-}
-.box>#one{
-  transform: translate3d(60%, 0, 0);
-}
-.box>#three{
-  transform: translate3d(-160%, 0, 0);
-}
-.chooseForm{
-  position: absolute;
-  left: 50%;
-  top:25%;
-  transform: translate3d(-50%, 0, 0);
-}
-#o{
-  color: #FFF;
-  writing-mode: vertical-lr;
-  position: absolute;
-  transform: translate3d(100%, 830%, 0);
-}
-#t{
-  color: #FFF;
-  position: absolute;
-  transform: translate3d(-53%, 830%, 0);
-  writing-mode: vertical-lr;
-}
-#th{
-  color: #FFF;
-  position: absolute;
-  transform: translate3d(-205%, 830%, 0);
-  writing-mode: vertical-lr;
+.alignContainer{
+  text-align: center;
 }
