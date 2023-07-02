@@ -15,39 +15,12 @@ import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
 
 function Welcome(props) {
-  // const [user1Img, setUser1Img] = useEffect(imgUser1)
-  // const [user2Img, setUser2Img] = useEffect(imgUser2)
-  // const [name1, setName1] = useEffect(document.getElementById('userInput1'))
-  // const [name2, setName2] = useEffect(document.getElementById('userInput2'))
-  // setName1(document.getElementById('userInput1'))
-  // setName2(document.getElementById('userInput2'))
-  // if (true){
-  //   switch (1) {
-  //     case 0:
-  //       setUser1Img(imgUser1)
-  //       break;
-  //     case 1:
-  //       setUser1Img(imgUser2)
-  //       break;
-  //     case 2:
-  //       setUser1Img(imgUser3)
-  //       break;
-  //     case 3:
-  //       setUser1Img(imgUser4)
-  //       break;
-  //     case 4:
-  //       setUser1Img(imgUser5)
-  //       break;
-  //     case 5:
-  //       setUser1Img(imgUser6)
-  //       break;
-  //     default:
-  //       break;
-  //   } 
-  // }
-  // if (charactorList.includes(name1)){
-  //   charactorList.indexOf(name1)
-  // }
+  const [user1Img, setUser1Img] = useState(imgUser1)
+  const [user2Img, setUser2Img] = useState(imgUser2)
+  // const [name1, setName1] = useState(document.getElementById('userInput1'))
+  // const [name2, setName2] = useState("asds")
+  // const [charactorList, setCharactorList] = useState(['김규민', '안예성', '오창민', '김상윤', '최성훈', '이재현'])
+  const [charactorList, setCharactorList] = useState([imgUser1, imgUser2, imgUser3, imgUser4, imgUser5, imgUser6])
   return (
     <div className='background'>
       <div className='container'>
@@ -59,11 +32,15 @@ function Welcome(props) {
           <input type="submit" value="Start!"></input>
         </form>
         <div className='user'>
-          <img className='userbunny1' src={imgUser1}></img>
+          <img onClick={()=>{
+            setUser1Img(charactorList[Math.floor(Math.random() * 6)])
+          }} className='userbunny1' src={user1Img}></img>
           <input id='userInput1' placeholder='캐릭터 선택' type='text'></input>
         </div>
         <div className='user'>
-          <img className='userbunny2' src={imgUser1}></img>
+          <img onClick={()=>{
+            setUser2Img(charactorList[Math.floor(Math.random() * 6)])
+          }} className='userbunny2' src={user2Img}></img>
           <input id='userInput2' placeholder='캐릭터 선택' type='text'></input>
         </div>
       </div>
