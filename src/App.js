@@ -10,6 +10,9 @@ import imgUser6 from './최성훈.png';
 import scissor from './scissor.png';
 import dollar from './dollar.png';
 import location from './location.png';
+import folder from './folder.png';
+import flipVideo1 from "./0001-0224.mp4";
+import flipVideo2 from "./0001-0225.mp4";
 
 function Welcome(props) {
   return (
@@ -38,9 +41,10 @@ function Welcome(props) {
 
 function Card(props) {
   return (
-    <form className='card-box' onSubmit={event => {
+    <form id={props.idnum} className='card-box' onSubmit={event => {
       event.preventDefault()
-      props.onGame(event.target.id)
+      props.onGamefunc(event.target.id)
+      console.log(event.target.id)
     }}>
       <div className='text-wrap'>
         <h1>{props.title}</h1>
@@ -58,12 +62,33 @@ function Choose(props) {
     <div className='background'>
       <div className='container alignContainer'>
         <img className='title' src={imgLogo}></img>
-        <Card imgLink={scissor} title={"가위바위보"}/>
-        <Card imgLink={dollar} title={"동전뒤집기"}/>
-        <Card imgLink={location} title={"순발력게임"}/>
+        <Card idnum='0' onGamefunc={props.onGame} imgLink={scissor} title={"가위바위보"}/>
+        <Card idnum='1' onGamefunc={props.onGame} imgLink={dollar} title={"동전뒤집기"}/>
+        <Card idnum='2' onGamefunc={props.onGame} imgLink={location} title={"순발력게임"}/>
+        <Card idnum='3' onGamefunc={props.onGame} imgLink={folder} title={"대전기록지"}/>
       </div>
     </div>
   );
+}
+function Flip(props) {
+
+  if (Math.floor(Math.random() * 2)){
+    return (
+      <video onClick={()=>{
+        console.log("hello world")
+      }} autoPlay muted>
+        <source src={flipVideo1} type="video/mp4"/>
+      </video>
+    );
+  } else {
+    return (
+      <video onClick={()=>{
+        console.log("hello world")
+      }} autoPlay muted>
+        <source src={flipVideo2} type="video/mp4"/>
+      </video>
+    );
+  }
 }
 // function App(props) {
 //   return (
@@ -82,22 +107,33 @@ function App() {
   else if (mode === "CHOOSE"){
     content = <Choose onGame={(int) => {
       if (int==0){
-        setMode('FLIP');
+        setMode('PAPER');
       }
       else if (int==1){
         setMode('FLIP');
       }
+      else if (int==2){
+        setMode('FAST');
+      }
       else{
-        setMode('FLIP');
+        setMode('RECORD');
       }
     }}/>;
   }
   else if (mode === "FLIP"){
-    
+    content = <Flip videoFile=""/>;
+  }
+  else if (mode === "PAPER"){
+    content = "hello PAPER";
+  }
+  else if (mode === "FAST"){
+    content = "hello FAST";
+  }
+  else if (mode === "RECORD"){
+    content = "hello RECORD";
   }
   return (
     content
-    
   );
 }
 

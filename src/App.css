@@ -10,6 +10,8 @@ html, body, #root,.background, .container{
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow:hidden;
+  margin:0 auto;
 }
 .background{
   padding: 40px;
@@ -126,4 +128,16 @@ html, body, #root,.background, .container{
 }
 .alignContainer{
   text-align: center;
+}
+/* video {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background: url() no-repeat;
+  background-size: cover;
+} */
+video {
+  width: 100vw;
+  background-size : cover;
+  overflow: hidden;
 }
