@@ -15,25 +15,44 @@ import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
 
 function Welcome(props) {
-  const [user1Img, setUser1Img] = useEffect(imgUser1)
-  const [user2Img, setUser2Img] = useEffect(imgUser2)
-  const charactorList = ['김규민', '오창민', '안예성', '김상윤', '이재현', '최성훈']
-  const [name1, setName1] = useEffect(document.getElementById('userInput1'))
-  const [name2, setName2] = useEffect(document.getElementById('userInput2'))
-  setName1(document.getElementById('userInput1'))
-  setName2(document.getElementById('userInput2'))
-  
-  if (charactorList.includes(name1)){
-    arr.indexOf(name1)
-  }
-  if (charactorList.includes(name1)){
-    arr.indexOf(name1)
-  }
+  // const [user1Img, setUser1Img] = useEffect(imgUser1)
+  // const [user2Img, setUser2Img] = useEffect(imgUser2)
+  // const [name1, setName1] = useEffect(document.getElementById('userInput1'))
+  // const [name2, setName2] = useEffect(document.getElementById('userInput2'))
+  // setName1(document.getElementById('userInput1'))
+  // setName2(document.getElementById('userInput2'))
+  // if (true){
+  //   switch (1) {
+  //     case 0:
+  //       setUser1Img(imgUser1)
+  //       break;
+  //     case 1:
+  //       setUser1Img(imgUser2)
+  //       break;
+  //     case 2:
+  //       setUser1Img(imgUser3)
+  //       break;
+  //     case 3:
+  //       setUser1Img(imgUser4)
+  //       break;
+  //     case 4:
+  //       setUser1Img(imgUser5)
+  //       break;
+  //     case 5:
+  //       setUser1Img(imgUser6)
+  //       break;
+  //     default:
+  //       break;
+  //   } 
+  // }
+  // if (charactorList.includes(name1)){
+  //   charactorList.indexOf(name1)
+  // }
   return (
     <div className='background'>
       <div className='container'>
         <img className='title' src={imgLogo}></img>
-        <form   className='startButton' onSubmit={event => {
+        <form className='startButton' onSubmit={event => {
             event.preventDefault()
             props.onStart()
           }}>
@@ -44,7 +63,7 @@ function Welcome(props) {
           <input id='userInput1' placeholder='캐릭터 선택' type='text'></input>
         </div>
         <div className='user'>
-          <img className='userbunny2' src={imgUser6}></img>
+          <img className='userbunny2' src={imgUser1}></img>
           <input id='userInput2' placeholder='캐릭터 선택' type='text'></input>
         </div>
       </div>
