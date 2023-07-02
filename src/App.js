@@ -1,6 +1,6 @@
 import './App.css';
 import imgLogo from './webtitle.png';
-import { useState } from "react";
+import React, { useRef, useState, ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import imgUser1 from './김규민.png';
 import imgUser2 from './김상윤.png';
 import imgUser3 from './안예성.png';
@@ -15,6 +15,20 @@ import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
 
 function Welcome(props) {
+  const [user1Img, setUser1Img] = useEffect(imgUser1)
+  const [user2Img, setUser2Img] = useEffect(imgUser2)
+  const charactorList = ['김규민', '오창민', '안예성', '김상윤', '이재현', '최성훈']
+  const [name1, setName1] = useEffect(document.getElementById('userInput1'))
+  const [name2, setName2] = useEffect(document.getElementById('userInput2'))
+  setName1(document.getElementById('userInput1'))
+  setName2(document.getElementById('userInput2'))
+  
+  if (charactorList.includes(name1)){
+    arr.indexOf(name1)
+  }
+  if (charactorList.includes(name1)){
+    arr.indexOf(name1)
+  }
   return (
     <div className='background'>
       <div className='container'>
@@ -27,13 +41,12 @@ function Welcome(props) {
         </form>
         <div className='user'>
           <img className='userbunny1' src={imgUser1}></img>
-          <input type='text'></input>
+          <input id='userInput1' placeholder='캐릭터 선택' type='text'></input>
         </div>
         <div className='user'>
           <img className='userbunny2' src={imgUser6}></img>
-          <input type='text'></input>
+          <input id='userInput2' placeholder='캐릭터 선택' type='text'></input>
         </div>
-        
       </div>
     </div>
   );
@@ -71,7 +84,6 @@ function Choose(props) {
   );
 }
 function Flip(props) {
-
   if (Math.floor(Math.random() * 2)){
     return (
       <video onClick={()=>{
@@ -89,6 +101,68 @@ function Flip(props) {
       </video>
     );
   }
+}
+function Circle(props) {
+  if (props.visible){
+    return (
+      <div onClick={()=>props.onclick()} style={{visibility:'visible'}} className='circleBTN'>
+        <h1>눌러</h1>
+      </div>
+    );
+  }else{
+    return (
+      <div onClick={()=>props.onclick()} style={{visibility:'hidden'}} className='circleBTN'>
+        <h1>눌러</h1>
+      </div>
+    );
+  }
+  
+}
+function Speed(props) {
+  // 첫번째 사람이 클릭하고 다음 사람이 클릭해서 기록 비교
+  const [count, setCount] = useState(0.00);
+  const [userA, setUserA] = useState();
+  const [userB, setUserB] = useState();
+  const [decrease, setDecrease] = useState(0.05)
+  const [nextTurn, setNextTurn] = useState("시작하기");
+
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCount(count => (count - decrease).toFixed(2)); 
+    }, 50);
+    if(Math.ceil(count) === 0){
+      clearInterval(id);
+    }
+    return (()=>
+      clearInterval(Math.ceil(id)));
+  }, [count]);
+  const [visibleIndex, setVisibleIndex] = useState(-1)
+  return (
+    <div className='background'>
+      <div className='container'>
+        <div className='alignContainer'>
+          <h1 className='timer'>{(6-count).toFixed(2)}</h1>
+          <Circle onclick={()=>{
+            setDecrease(0)
+            setNextTurn("다시시작")
+          }} visible={visibleIndex==0?true:false} />
+          <Circle visible={false} />
+          <Circle onclick={()=>{
+            setDecrease(0)
+            setNextTurn("다시시작")
+          }}e visible={visibleIndex==1?true:false} />
+          {/*다음차례*/}
+          <h1 onClick={()=>{
+            setCount(6)
+            setDecrease(0.05)
+            setNextTurn("")
+            setVisibleIndex(Math.floor(Math.random() * 2))
+          }} className='strtButton'>{nextTurn}</h1>
+        </div>
+      </div>
+    </div>
+  );
 }
 // function App(props) {
 //   return (
@@ -127,7 +201,7 @@ function App() {
     content = "hello PAPER";
   }
   else if (mode === "FAST"){
-    content = "hello FAST";
+    content = <Speed/>
   }
   else if (mode === "RECORD"){
     content = "hello RECORD";
