@@ -11,9 +11,12 @@ import scissor from './scissor.png';
 import dollar from './dollar.png';
 import location from './location.png';
 import folder from './folder.png';
+import file from './file.png';
+import sphere from './sphere.png';
 import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
 
+window.localStorage.setItem('FLIP', value)
 function Welcome(props) {
   const [user1Img, setUser1Img] = useState(imgUser1)
   const [user2Img, setUser2Img] = useState(imgUser2)
@@ -60,7 +63,7 @@ function Card(props) {
         {/* <p>순발력이 중요함</p> */}
       </div>
       <input value="" type="submit"/>
-      <div className='imgCover'>
+      <div className='imgCover1'>
         <img src={props.imgLink}/>
       </div>
   </form>
@@ -166,6 +169,75 @@ function Speed(props) {
 //   );
 // }
 
+function PaperBTN(props) {
+  return (
+    <div onClick={()=>{
+      props.onclick()
+    }} className='imgCover'>
+      <img src={props.imgLink}/>
+    </div>
+  );
+}
+function Paper(props) {
+  const [count, setCount] = useState(200000)
+  const [score, setScore] = useState(0)
+  const [handIndex, setHandIndex] = useState(0) 
+  const [handList, setHandList] = useState([scissor, sphere, file])
+  const [randInt, setRandInt] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCount(count => (count - 0.5).toFixed(2)); 
+    }, 50);
+    if(Math.ceil(count) === 0){
+      clearInterval(id);
+    }
+    return (()=>
+      clearInterval(Math.ceil(id)));
+  }, [count]);
+  return(
+    <div className='background'>
+      <div className='container'>
+        <div className='alignContainer'>
+          <h1 className='timer' id='paperScore'>{score}</h1>
+          <h1 className='timer' id='paperScore1'>{(score/(200000-count)*1000).toFixed(2)}</h1>
+          <img className='paperImg' src={handList[randInt]}/>
+          <div className='alignContainer'>
+            <PaperBTN onclick={()=>{
+              setRandInt(Math.floor(Math.random()*3))
+              if (randInt==0){
+                setScore(score+1)
+              }
+              else{
+                setScore(0)
+                setCount(200000)
+              }
+            }} imgLink={sphere}/>
+            <PaperBTN onclick={()=>{
+              setRandInt(Math.floor(Math.random()*3))
+              if (randInt==1){
+                setScore(score+1)
+              }
+              else{
+                setScore(0)
+                setCount(200000)
+              }
+            }} imgLink={file}/>
+            <PaperBTN onclick={()=>{
+              setRandInt(Math.floor(Math.random()*3))
+              if (randInt==2){
+                setScore(score+1)
+              }
+              else{
+                setScore(0)
+                setCount(200000)
+              }
+            }} imgLink={scissor}/>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 function App() {
   const [mode, setMode] = useState("WELCOME");
   let content;
@@ -191,10 +263,10 @@ function App() {
     }}/>;
   }
   else if (mode === "FLIP"){
-    content = <Flip videoFile=""/>;
+    content = <Flip/>;
   }
   else if (mode === "PAPER"){
-    content = "hello PAPER";
+    content = <Paper/>;
   }
   else if (mode === "FAST"){
     content = <Speed/>
