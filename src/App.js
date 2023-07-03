@@ -16,7 +16,6 @@ import sphere from './sphere.png';
 import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
 
-window.localStorage.setItem('FLIP', value)
 function Welcome(props) {
   const [user1Img, setUser1Img] = useState(imgUser1)
   const [user2Img, setUser2Img] = useState(imgUser2)
@@ -35,13 +34,13 @@ function Welcome(props) {
           <input type="submit" value="Start!"></input>
         </form>
         <div className='user'>
-          <img onClick={()=>{
+          <img title="눌러바" onClick={()=>{
             setUser1Img(charactorList[Math.floor(Math.random() * 6)])
           }} className='userbunny1' src={user1Img}></img>
           <input id='userInput1' placeholder='캐릭터 선택' type='text'></input>
         </div>
         <div className='user'>
-          <img onClick={()=>{
+          <img title="눌러바" onClick={()=>{
             setUser2Img(charactorList[Math.floor(Math.random() * 6)])
           }} className='userbunny2' src={user2Img}></img>
           <input id='userInput2' placeholder='캐릭터 선택' type='text'></input>
@@ -84,6 +83,7 @@ function Choose(props) {
 }
 function Flip(props) {
   if (Math.floor(Math.random() * 2)){
+    window.localStorage.setItem('FLIP', '앞면')
     return (
       <video onClick={()=>{
         console.log("hello world")
@@ -92,6 +92,7 @@ function Flip(props) {
       </video>
     );
   } else {
+    window.localStorage.setItem('FLIP', '뒷면')
     return (
       <video onClick={()=>{
         console.log("hello world")
@@ -143,11 +144,13 @@ function Speed(props) {
         <div className='alignContainer'>
           <h1 className='timer'>{(6-count).toFixed(2)}</h1>
           <Circle onclick={()=>{
+            window.localStorage.setItem('SPEED', (6-count).toFixed(2))
             setDecrease(0)
             setNextTurn("다시시작")
           }} visible={visibleIndex==0?true:false} />
           <Circle visible={false} />
           <Circle onclick={()=>{
+            window.localStorage.setItem('SPEED', (6-count).toFixed(2))
             setDecrease(0)
             setNextTurn("다시시작")
           }}e visible={visibleIndex==1?true:false} />
@@ -208,6 +211,7 @@ function Paper(props) {
                 setScore(score+1)
               }
               else{
+                window.localStorage.setItem('SCISSOR', score)
                 setScore(0)
                 setCount(200000)
               }
@@ -218,6 +222,7 @@ function Paper(props) {
                 setScore(score+1)
               }
               else{
+                window.localStorage.setItem('SCISSOR', score)
                 setScore(0)
                 setCount(200000)
               }
@@ -228,6 +233,7 @@ function Paper(props) {
                 setScore(score+1)
               }
               else{
+                window.localStorage.setItem('SCISSOR', score)
                 setScore(0)
                 setCount(200000)
               }
@@ -238,6 +244,37 @@ function Paper(props) {
     </div>
   );
 }
+function Card1(props) {
+  return (
+    <div onClick={
+      ()=>{props.onclick('CHOOSE')}
+    } className='card-box'>
+      <div className='text-wrap'>
+        <h1>{window.localStorage.getItem(props.keyValue)}</h1>
+        <p>{props.title}</p>
+      </div>
+      <div className='imgCover1'>
+        <img src={props.imgLink}/>
+      </div>
+    </div>
+  );
+}
+function Record(props) {
+  return (
+    <div className='background'>
+      <div className='container alignContainer'>
+        <img className='title' src={imgLogo}></img>
+        <Card1 onclick={()=>{}} keyValue='SCISSOR' idnum='0' imgLink={scissor} title={"가위바위보"}/>
+        <Card1 onclick={()=>{}} keyValue='FLIP' idnum='1' imgLink={dollar} title={"동전뒤집기"}/>
+        <Card1 onclick={()=>{}} keyValue='SPEED' idnum='2' imgLink={location} title={"순발력게임"}/>
+        <Card1 onclick={()=>{
+          props.setmode('CHOOSE')
+        }} keyValue='' idnum='3' imgLink={folder} title={"대전기록지"}/>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [mode, setMode] = useState("WELCOME");
   let content;
@@ -272,7 +309,7 @@ function App() {
     content = <Speed/>
   }
   else if (mode === "RECORD"){
-    content = "hello RECORD";
+    content = <Record setmode={()=>setMode("CHOOSE")}/>
   }
   return (
     content
