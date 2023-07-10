@@ -15,6 +15,9 @@ import file from './file.png';
 import sphere from './sphere.png';
 import flipVideo1 from "./0001-0224.mp4";
 import flipVideo2 from "./0001-0225.mp4";
+import useSound from 'use-sound';
+import BGM from './audios/BGM.mp3';
+// import ES from 'audios/ES.mp3';
 
 function Welcome(props) {
   const [user1Img, setUser1Img] = useState(imgUser1)
@@ -276,10 +279,12 @@ function Record(props) {
 }
 
 function App() {
+  const [play] = useSound(BGM);
   const [mode, setMode] = useState("WELCOME");
   let content;
   if (mode === "WELCOME"){
     content = <Welcome onStart={() => {
+      play()
       setMode('CHOOSE');
     }}/>;
   }
